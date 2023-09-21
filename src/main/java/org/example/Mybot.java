@@ -5,13 +5,17 @@ import org.telegram.telegrambots.meta.ApiConstants;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import javax.swing.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Mybot extends TelegramLongPollingBot {
@@ -81,6 +85,22 @@ public class Mybot extends TelegramLongPollingBot {
             row2.add("TODAY");
             rowList.add(row2);
             sendMessage.setReplyMarkup(replyKeyboardMarkup);
+
+            InlineKeyboardButton menuButton = new InlineKeyboardButton();
+            menuButton.setText("Go to menu");
+            menuButton.setCallbackData("menu");
+
+            InlineKeyboardButton testButton = new InlineKeyboardButton();
+            testButton.setText("Go to Test");
+            testButton.setCallbackData("123");
+
+            List<InlineKeyboardButton> secondRow = new LinkedList<>();
+            secondRow.add(menuButton);
+            secondRow.add(testButton);
+
+            List<List<InlineKeyboardButton>> list = new LinkedList<>();
+            list.add((List<InlineKeyboardButton>) menuButton);
+
         }
         else if(text.toUpperCase().equals("TODAY"))
         {
